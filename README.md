@@ -2,6 +2,8 @@
 
 Nexus is a Minecraft launcher that lets you run almost any game version, install mods, and create modpacks. It supports both cracked (pirated) and official accounts and offers various appearance settings. Developer: Nexios.Powered by Frog Launcher!!!
 
+## Download
+Download our launcher using https://nexuslauncher.page.gd
 
 ## Features
 
@@ -23,33 +25,12 @@ Nexus is built using the following technologies:
 - **[tomate-loaders](https://github.com/doublekekse/tomate-loaders)**
 - **[MSMC](https://github.com/Hanro50/MSMC)**
 
-## Installation
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/Seeroy/FrogLauncher2.git
-    cd FrogLauncher2
-    ```
-
-2. Install dependencies:
-    ```bash
-    npm install
-    ```
-
-3. Run the launcher:
-    ```bash
-    npm start
-    ```
-    
-4. You can also use the development mode:
-    ```bash
-    npm run dev
-    ```
-    
 ## License
 
-This project is licensed under the GPL-3.0 license. See [LICENSE](LICENSE) for details.
+This project is licensed under the GPL-3.0 license.
 
 ---
 
 **Nexus** by **Nexios** is a great choice for anyone looking to diversify and enhance their Minecraft experience!
+
