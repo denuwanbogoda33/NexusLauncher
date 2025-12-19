@@ -1,0 +1,163 @@
+<link rel="stylesheet" href="sections/settings/about.css"/>
+
+<div class="flex flex-center flex-gap-8 settings-item" id="aboutItem">
+    <img src="assets/icon.png" alt="Launcher icon" height="64"/>
+    <div class="flex flex-grow flex-col flex-justify-center flex-gap-4">
+        <!-- Заголовок -->
+        <div class="flex flex-align-center flex-gap-8">
+            <span class="name">Nexus</span>
+        </div>
+
+        <div class="description">
+            <!-- Версия лаунчера -->
+            <div class="chip" id="launcherVersion">
+                <span class="ver"></span>
+                <div class="microdot">
+                    <div class="dot"></div>
+                </div>
+                <span class="inDev" style="display: none">Development</span>
+                <span class="inRelease" style="display: none">Release</span>
+            </div>
+            <div class="microdot">
+                <div class="dot"></div>
+            </div>
+            <!-- Название OS -->
+            <h3 id="about_operatingSystem"></h3>
+            <div class="microdot">
+                <div class="dot"></div>
+            </div>
+            <!-- Имя пользователя OS -->
+            <h3 id="about_username"></h3>
+            <div class="microdot">
+                <div class="dot"></div>
+            </div>
+            <!-- Архитектура ПК -->
+            <h3 id="about_arch"></h3>
+            <div class="microdot">
+                <div class="dot"></div>
+            </div>
+            <!-- Название процессора -->
+            <h3 id="about_cpuName"></h3>
+        </div>
+    </div>
+</div>
+
+<div class="grid-wrapper">
+    <div class="flex flex-center flex-gap-8 settings-item clickable"
+         onclick="openExternal('https://nexuslauncher.page.gd')">
+        <div class="icon">
+            <span class="material-symbols-outlined">open_in_new</span>
+        </div>
+        <div class="flex flex-grow flex-col flex-justify-center">
+            <span class="name">{{settings.about.site}}</span>
+        </div>
+    </div>
+
+    <div class="flex flex-center flex-gap-8 settings-item clickable"
+         onclick="openExternal(`https://github.com/denuwanbogoda33/NexusLauncher`)">
+        <div class="icon">
+            <img src="assets/github.png"/>
+        </div>
+        <div class="flex flex-grow flex-col flex-justify-center">
+            <span class="name">{{settings.about.sources}}</span>
+        </div>
+    </div>
+
+
+
+    <div class="flex flex-center flex-gap-8 settings-item clickable"
+         onclick="openExternal('https://nexuslauncher.page.gd/eula.html')">
+        <div class="icon">
+            <span class="material-symbols-outlined">developer_guide</span>
+        </div>
+        <div class="flex flex-grow flex-col flex-justify-center">
+            <span class="name">{{settings.about.eula}}</span>
+        </div>
+    </div>
+
+
+    <div class="flex flex-center flex-gap-8 settings-item clickable" onclick="FrogCollector.collectDebugData()">
+        <div class="icon">
+            <span class="material-symbols-outlined">bug_report</span>
+        </div>
+        <div class="flex flex-grow flex-col flex-justify-center">
+            <span class="name">{{settings.about.debug}}</span>
+        </div>
+    </div>
+
+    <div class="flex flex-center flex-gap-8 settings-item clickable" onclick="FrogModals.switchModal('changelog')">
+        <div class="icon">
+            <span class="material-symbols-outlined">history</span>
+        </div>
+        <div class="flex flex-grow flex-col flex-justify-center">
+            <span class="name">{{settings.about.history}}</span>
+        </div>
+    </div>
+
+    <div class="flex flex-center flex-gap-8 settings-item clickable"
+         onclick="openExternal('https://nexuslauncher.page.gd/privacy-policy.html')">
+        <div class="icon">
+            <span class="material-symbols-outlined">security</span>
+        </div>
+        <div class="flex flex-grow flex-col flex-justify-center">
+            <span class="name">{{settings.about.privacyPolicy}}</span>
+        </div>
+    </div>
+</div>
+
+<div class="flex flex-center flex-gap-8 settings-item">
+    <div class="icon">
+        <span class="material-symbols-outlined">system_update_alt</span>
+    </div>
+    <div class="flex flex-grow flex-col flex-justify-center">
+        <span class="name">{{settings.about.autoInstall.title}}</span>
+        <div class="description">{{settings.about.autoInstall.description}}</div>
+    </div>
+    <label class="switch" data-setting="autoInstallUpdates">
+        <input type="checkbox" id="autoInstallUpdatesToggle">
+        <span class="inner"></span>
+    </label>
+</div>
+
+<div class="flex flex-center flex-gap-8 settings-item">
+    <div class="icon">
+        <span class="material-symbols-outlined">category</span>
+    </div>
+    <div class="flex flex-grow flex-col flex-justify-center">
+        <span class="name">{{settings.about.lessDataCollection.title}}</span>
+        <div class="description">{{settings.about.lessDataCollection.description}}</div>
+    </div>
+    <label class="switch" data-setting="lessDataCollection">
+        <input type="checkbox">
+        <span class="inner"></span>
+    </label>
+</div>
+
+<script>
+    // Задаём текста из OS    // Задаём текста из OS
+    $("#about_operatingSystem").text(os.version());
+    $("#about_username").text(os.userInfo().username);
+    $("#about_arch").text(os.arch());
+    let cpuName = os.cpus()[0].model.trim().split("@")[0].replaceAll("Processor", "");
+    $("#about_cpuName").text(cpuName);
+    // Задаём версию лаунчера
+    $("#launcherVersion .ver").text(LAUNCHER_VERSION);
+
+    // DEV or RELEASE mode?
+    if (IS_APP_IN_DEV) {
+        $("#launcherVersion .inDev").show();
+    } else {
+        $("#launcherVersion .inRelease").show();
+    }
+
+    // Initialize Auto Install Updates toggle
+    try {
+        const autoInstall = FrogConfig.read('autoInstallUpdates', true);
+        $('#autoInstallUpdatesToggle').prop('checked', autoInstall === true);
+        $('#autoInstallUpdatesToggle').change(function () {
+            FrogConfig.write('autoInstallUpdates', $(this).is(':checked'));
+        });
+    } catch (e) {
+        console.warn('Auto install toggle init failed', e);
+    }
+</script>

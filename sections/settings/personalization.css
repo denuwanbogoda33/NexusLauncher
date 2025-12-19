@@ -1,0 +1,34 @@
+#languages-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0.5em;
+}
+
+#languages-list .item .icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 9999px;
+}
+
+#languages-list .item .text > span:first-child {
+    font-weight: 600;
+}
+
+#languages-list .item .text > span:last-child,
+#languages-list .item .text sup {
+    color: var(--text-sub);
+}
+
+#languages-list .item .text sup {
+    opacity: 0.88;
+    font-weight: 400 !important;
+}
+
+#modal-settings .settings-item .wallpapers-list-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: end;
+    align-items: center;
+    max-width: 50%;
+}
